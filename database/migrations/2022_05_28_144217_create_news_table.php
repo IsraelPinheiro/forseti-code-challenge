@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->uuid();
             $table->string('headline');
-            $table->text('text')->default('loading...');
+            $table->text('text');
             $table->string('link');
             $table->boolean('tagged')->default(false);
             $table->timestamp('published_at');
