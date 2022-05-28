@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\News;
+use App\Models\Tag;
+use App\Observers\NewsObserver;
+use App\Observers\TagObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -39,4 +43,14 @@ class EventServiceProvider extends ServiceProvider
     {
         return false;
     }
+
+    /**
+     * The model observers for your application.
+     *
+     * @var array
+     */
+    protected $observers = [
+        News::class => [NewsObserver::class],
+        Tag::class => [TagObserver::class]
+    ];
 }
