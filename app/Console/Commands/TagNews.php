@@ -15,13 +15,6 @@ class TagNews extends Command
 
     private $tags;
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->tags = Tag::all();
-    }
-
-
     /**
      * Execute the console command.
      *
@@ -29,6 +22,8 @@ class TagNews extends Command
      */
     public function handle()
     {
+        $this->tags = Tag::all();
+
         if(!$this->tags->count()>0){
             $this->error("No Tags found");
             return 0;
