@@ -56,7 +56,7 @@ class TagNews extends Command
             }
         } catch (ModelNotFoundException $exception) {
             $this->error("No News found with id ".$this->option('news')." and the selected options");
-            return 0;
+            return false;
         } catch (Exception $exception){
             throw $exception;
         }
