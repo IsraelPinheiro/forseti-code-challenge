@@ -37,12 +37,11 @@ class GetNews extends Command
                     'published_at' => $published_at
                 ],[
                     'headline' => $headline,
+                    'text' => (new Client())->request('GET', $link)->filter('#parent-fieldname-text')->text(),
                     'link' => $link,
                     'published_at' => $published_at
                 ]);
                 if($news->wasRecentlyCreated){
-                    $news->text = (new Client())->request('GET', $link)->filter('#parent-fieldname-text')->text();
-                    $news->save();
                     $this->newNews +=1;
                 }
             });
