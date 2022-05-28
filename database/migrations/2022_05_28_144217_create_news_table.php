@@ -18,6 +18,7 @@ return new class extends Migration
             $table->uuid();
             $table->string('headline');
             $table->string('link');
+            $table->boolean('tagged')->default(false);
             $table->timestamp('published_at');
             $table->timestamps();
             $table->softDeletes();
