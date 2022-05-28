@@ -21,6 +21,10 @@ class News extends Model
         'published_at'
     ];
 
+    protected $casts = [
+        'tagged' => 'boolean',
+    ];
+
     /**
      * The tags that this news was tagged with.
      */
