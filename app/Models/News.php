@@ -18,4 +18,12 @@ class News extends Model
     protected $dates = [
         'published_at'
     ];
+
+    /**
+     * The tags that this news was tagged with.
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }
