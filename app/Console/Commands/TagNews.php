@@ -64,10 +64,12 @@ class TagNews extends Command
 
     private function tagNews(News $news){
         try {
+            $headline = strtolower($news->headline);
             $text = strtolower($news->text);
             $tagsFound = [];
             foreach ($this->tags as $tag) {
-                $tagOccurrences = substr_count($text, strtolower($tag->tag));
+                $tagOccurrences = substr_count($headline, strtolower($tag->tag));
+                $tagOccurrences += substr_count($text, strtolower($tag->tag));
                 if($tagOccurrences>0){
                     $tagsFound[$tag->id] = ['occurrences' => $tagOccurrences];
                     $news->tagged = true;
