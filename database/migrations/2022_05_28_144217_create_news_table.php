@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
+            $table->string('headline');
+            $table->string('link');
+            $table->timestamp('published_at');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
