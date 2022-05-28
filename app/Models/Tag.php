@@ -20,6 +20,6 @@ class Tag extends Model
      */
     public function news()
     {
-        return $this->belongsToMany(News::class);
+        return $this->belongsToMany(News::class)->withPivot('occurrences');
     }
 }
