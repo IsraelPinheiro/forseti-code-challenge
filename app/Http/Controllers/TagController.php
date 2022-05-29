@@ -69,7 +69,7 @@ class TagController extends Controller
      * @param  string $uuid
      * @return JsonResponse
      */
-    public function show(Request $request, string $uuid):JsonResponse
+    public function news(Request $request, string $uuid):JsonResponse
     {
         try {
             $request->merge([
@@ -79,7 +79,7 @@ class TagController extends Controller
             ]);
 
             $tag = Tag::where('uuid',$uuid)->firstOrFail();
-            return $this->success($tag);
+            return $this->success($tag->news);
         } catch (Exception $exception) {
             return $this->error(
                 $exception->getMessage(),
