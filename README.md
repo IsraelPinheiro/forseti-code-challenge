@@ -1,64 +1,89 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://www.forseti.com.br/wp-content/uploads/2022/05/Logo-Forseti-Soluções-Todo-Branco.png" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<h1 align="center">Forseti Code Challenge</h1>
+<h2 align="center">Challenger: <a href="https://github.com/IsraelPinheiro">Israel Pinheiro</a></h1>
 
-## About Laravel
+## :desktop_computer: Technologies Used
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Main Technologies
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- PHP 8.1: As predetermined, PHP was used as the language for the challenge;
+- Laravel 9.14: Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects;
+- MySQL 8.0: MySQL was chosen for being one of the most used and well known database engines in the market;
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Other Technologies
+- Composer: Application-level package manager for the PHP programming language that provides a standard format for managing PHP software dependencies and required libraries;
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## :gear:Instalation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Step 1: Preparation
 
-## Laravel Sponsors
+Have PHP, MySQL and Composer installed in versions compatible for the project
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- Step 2: Cloning
 
-### Premium Partners
+```bash
+$git clone git@github.com:IsraelPinheiro/forseti-code-challenge.git
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- Step 3: Instalation
 
-## Contributing
+Access the folder of the cloned repo and run the following commands
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+$composer install
+```
 
-## Code of Conduct
+- Step 4: Environment Variables
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Add/change the pertinent data on .env to reflect the local environment
 
-## Security Vulnerabilities
+```bash
+DATABASE_HOST = {database_host}
+DATABASE_NAME = {database_name}
+DATABASE_PORT = {database_port}
+DATABASE_USER = {database_user}
+DATABASE_PASSWORD = {database_password}
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Some basic conficurations for the web crawler can be made by editing the following keys on the .env file:
 
-## License
+```bash
+ITEMS_PER_PAGE = 30
+MAX_PAGES_TO_CRAWL = 5
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Step 5: Database strucutre and default data
+
+After configuring the DBMS access, the database structure must be provided, it can be done by running the following command:
+
+```bash
+$php artisan migrate --seed
+```
+
+- Step 5: Run! :runner:
+
+Now, the application should be ready to run.
+Access the root of your web server pointing to the cloned folder, use the internal PHP Web Server or the web server provided by Laravel Artisan using the following command
+
+```bash
+$php artisan serve
+```
+
+- Step 6: Automation
+
+When using Laravel's scheduler, we only need to add a single cron configuration entry to our server that runs the schedule:run command every minute. 
+
+```bash
+* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
+```
+
+Typically, you would not add a scheduler cron entry to your local development machine. Instead, you may use the schedule:work Artisan command. This command will run in the foreground and invoke the scheduler every minute until you terminate the command:
+
+```bash
+php artisan schedule:work
+```
+- Step 7: Accessing Information
+
+A basic API is provided so the information provided by the automated crawler can be accessed, manipulated and export. The API documentation can be found <a href='https://documenter.getpostman.com/view/3768689/Uz5CLxVx'>here</a>
