@@ -15,6 +15,11 @@ class Tag extends Model
         'tag',
     ];
 
+    protected $hidden = [
+        'id'
+    ];
+
+
     /**
      * The News that were tagged with this Tag.
      */

@@ -26,6 +26,10 @@ class News extends Model
         'tagged' => 'boolean',
     ];
 
+    protected $hidden = [
+        'id'
+    ];
+
     protected $appends = [
         'tag_list'
     ];
