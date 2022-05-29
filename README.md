@@ -88,3 +88,15 @@ php artisan schedule:work
 - Step 8: Accessing Information
 
 A basic API is provided so the information provided by the automated crawler can be accessed, manipulated and export. The API documentation can be found <a href='https://documenter.getpostman.com/view/3768689/Uz5CLxVx'>here</a>
+
+## :envelope:Contact and Acknowledgments 
+
+Have any question ?
+You can contact me by the following channels:
+
+<h3 style="text-align:left">Get in touch:</h3>
+
+* <a href="https://api.whatsapp.com/send?phone=5585991520250">Whatsapp</a>
+* <a href="https://t.me/israelrpinheiro">Telegram</a>
+* <a href="mailto:israel.pinheiro@live.com">Email</a>
+* <a href="https://www.linkedin.com/in/israelpinheiro">Linkedin</a>
