@@ -25,23 +25,25 @@ class NewsController extends Controller
             $request->validate([
                 'limit' => ['sometimes', 'required', 'numeric', 'min:1'],
                 'offset' => ['sometimes', 'required', 'numeric', 'min:1'],
-                'date_to' => ['sometimes', 'required', 'date', 'before_or_equal:today'],
-                'date_from' => ['sometimes', 'required', 'date', 'before_or_equal:date_to'],
+                'query_from' => ['sometimes', 'required', 'date', 'before_or_equal:query_to'],
+                'query_to' => ['sometimes', 'required', 'date', 'before_or_equal:today'],
                 'tags' => ['sometimes', 'required', 'array', 'min:1']
             ]);
 
             if($request->has('tags')){
                 $tags = Tag::whereIn('tag', $request->tags)->pluck('id');
+            }else{
+                $tags = [];
             }
             
             $news = News::when($request->has('offset'), function($query) use($request){
                 $query->skip($request->offset);
             })->when($request->has('limit'), function($query) use($request){
                 $query->take($request->limit);
-            })->when($request->has('date_from'), function($query) use($request){
-                $query->where('created_at','>=',$request->date_from);
-            })->when($request->has('date_to'), function($query) use($request){
-                $query->where('created_at','<=',$request->date_to);
+            })->when($request->has('query_from'), function($query) use($request){
+                $query->where('created_at','>=',$request->query_from);
+            })->when($request->has('query_to'), function($query) use($request){
+                $query->where('created_at','<=',$request->query_to);
             })->when($tags, function($query) use($tags){
                 $query->whereHas('tags', function($query) use($tags){
                     $query->whereIn('id', $tags);
@@ -134,8 +136,8 @@ class NewsController extends Controller
             $request->validate([
                 'limit' => ['sometimes', 'required', 'numeric', 'min:1'],
                 'offset' => ['sometimes', 'required', 'numeric', 'min:1'],
-                'date_to' => ['sometimes', 'required', 'date', 'before_or_equal:today'],
-                'date_from' => ['sometimes', 'required', 'date', 'before_or_equal:date_to'],
+                'query_to' => ['sometimes', 'required', 'date', 'before_or_equal:today'],
+                'query_from' => ['sometimes', 'required', 'date', 'before_or_equal:query_to'],
                 'tags' => ['sometimes', 'required', 'array', 'min:1']
             ]);
 
@@ -147,10 +149,10 @@ class NewsController extends Controller
                 $query->skip($request->offset);
             })->when($request->has('limit'), function($query) use($request){
                 $query->take($request->limit);
-            })->when($request->has('date_from'), function($query) use($request){
-                $query->where('created_at','>=',$request->date_from);
-            })->when($request->has('date_to'), function($query) use($request){
-                $query->where('created_at','<=',$request->date_to);
+            })->when($request->has('query_from'), function($query) use($request){
+                $query->where('created_at','>=',$request->query_from);
+            })->when($request->has('query_to'), function($query) use($request){
+                $query->where('created_at','<=',$request->query_to);
             })->when($tags, function($query) use($tags){
                 $query->whereHas('tags', function($query) use($tags){
                     $query->whereIn('id', $tags);
