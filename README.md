@@ -15,7 +15,7 @@
 - Composer: Application-level package manager for the PHP programming language that provides a standard format for managing PHP software dependencies and required libraries;
 
 
-## :gear:Instalation
+## :gear:Instalation, preparation and usage
 
 - Step 1: Preparation
 
@@ -62,7 +62,7 @@ After configuring the DBMS access, the database structure must be provided, it c
 $php artisan migrate --seed
 ```
 
-- Step 5: Run! :runner:
+- Step 6: Run! :runner:
 
 Now, the application should be ready to run.
 Access the root of your web server pointing to the cloned folder, use the internal PHP Web Server or the web server provided by Laravel Artisan using the following command
@@ -71,7 +71,7 @@ Access the root of your web server pointing to the cloned folder, use the intern
 $php artisan serve
 ```
 
-- Step 6: Automation
+- Step 7: Automation
 
 When using Laravel's scheduler, we only need to add a single cron configuration entry to our server that runs the schedule:run command every minute. 
 
@@ -84,6 +84,7 @@ Typically, you would not add a scheduler cron entry to your local development ma
 ```bash
 php artisan schedule:work
 ```
-- Step 7: Accessing Information
+
+- Step 8: Accessing Information
 
 A basic API is provided so the information provided by the automated crawler can be accessed, manipulated and export. The API documentation can be found <a href='https://documenter.getpostman.com/view/3768689/Uz5CLxVx'>here</a>
