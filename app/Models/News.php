@@ -35,7 +35,7 @@ class News extends Model
     ];
 
     public function getTagListAttribute(){
-        return $this->tags()->pluck('tag');
+        return implode('|', $this->tags()->pluck('tag')->toArray());   
     }
 
     /**
