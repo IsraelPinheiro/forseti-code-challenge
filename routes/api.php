@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('json.response')->group(function () {
+    //Routes to check server connectivity
+    Route::get('/', function () {
+        return redirect()->route('online');
+    });
+    Route::get('/online', [ApplicationController::class, 'check'])->name('online');
+
+    //News related routes
+    Route::prefix('news')->group(function () {
+        Route::get('/', [NewsController::class, 'index']);
+        Route::get('/csv', [NewsController::class, 'exportToCsv']);
+        Route::get('/{uuid}', [NewsController::class, 'show']);
+        Route::get('/{uuid}/csv', [NewsController::class, 'exportOneToCsv']);
+        Route::delete('/{uuid}', [NewsController::class, 'destroy']);
+    });
+
+    //Tags related routes
+    Route::prefix('tags')->group(function () {
+        Route::get('/', [TagController::class, 'index']);
+        Route::post('/', [TagController::class, 'store']);
+        Route::get('/{uuid}/news', [TagController::class, 'news']);
+        Route::delete('/{uuid}', [TagController::class, 'destroy']);
+    });
 });
