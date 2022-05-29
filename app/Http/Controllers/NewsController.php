@@ -7,6 +7,7 @@ use App\Models\Tag;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Schema;
 use League\Csv\Writer;
 use SplTempFileObject;
@@ -130,7 +131,7 @@ class NewsController extends Controller
      * @param  Request $request
      * @return JsonResponse
      */
-    public function exportToCsv(Request $request):JsonResponse
+    public function exportToCsv(Request $request)
     {
         try {
             $request->validate([
@@ -160,16 +161,20 @@ class NewsController extends Controller
             })->get();
 
             $csv = Writer::createFromFileObject(new SplTempFileObject());
-            $csv->insertOne(Schema::getColumnListing((new News())->getTable()));
+            $columns = Schema::getColumnListing((new News())->getTable());
+            array_push($columns, 'tags');
+            $csv->insertOne($columns);
 
             if($news->count()){
-                $csv->insertAll($news);
+                foreach ($news as $item) {
+                    $csv->insertOne($item->toArray());
+                }
             }
             
             return response((string) $csv, 200, [
                 'Content-Type' => 'text/csv',
                 'Content-Transfer-Encoding' => 'binary',
-                'Content-Disposition' => 'attachment; filename="people.csv"',
+                'Content-Disposition' => 'attachment; filename="news.csv"',
             ]);
 
         } catch (Exception $exception) {
@@ -191,7 +196,7 @@ class NewsController extends Controller
      * @param  string $uuid
      * @return JsonResponse
      */
-    public function exportOneToCsv(Request $request, string $uuid):JsonResponse
+    public function exportOneToCsv(Request $request, string $uuid)
     {
         try {
             $request->merge([
@@ -203,13 +208,15 @@ class NewsController extends Controller
             $news = News::where('uuid',$uuid)->firstOrFail();
             
             $csv = Writer::createFromFileObject(new SplTempFileObject());
-            $csv->insertOne(Schema::getColumnListing((new News())->getTable()));
-            $csv->insertOne($news);
+            $columns = Schema::getColumnListing((new News())->getTable());
+            array_push($columns, 'tags');
+            $csv->insertOne($columns);
+            $csv->insertOne($news->toArray());
             
             return response((string) $csv, 200, [
                 'Content-Type' => 'text/csv',
                 'Content-Transfer-Encoding' => 'binary',
-                'Content-Disposition' => 'attachment; filename="people.csv"',
+                'Content-Disposition' => 'attachment; filename="news.csv"',
             ]);
         } catch (Exception $exception) {
             return $this->error(
