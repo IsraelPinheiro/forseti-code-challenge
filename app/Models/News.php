@@ -26,6 +26,14 @@ class News extends Model
         'tagged' => 'boolean',
     ];
 
+    protected $appends = [
+        'tag_list'
+    ];
+
+    public function getTagListAttribute(){
+        return $this->tags()->pluck('tag');
+    }
+
     /**
      * The tags that this news was tagged with.
      */
