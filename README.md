@@ -8,10 +8,11 @@
 ### Main Technologies
 
 - PHP 8.1: As predetermined, PHP was used as the language for the challenge;
-- Laravel 9.14: Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects;
+- Laravel 9.14: Laravel is a application framework with expressive, elegant syntax. Development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many projects;
 - MySQL 8.0: MySQL was chosen for being one of the most used and well known database engines in the market;
 
 ### Other Technologies
+
 - Composer: Application-level package manager for the PHP programming language that provides a standard format for managing PHP software dependencies and required libraries;
 
 
